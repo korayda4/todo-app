@@ -35,10 +35,6 @@ export const useLocalStorage = () => {
     setIsHydrated(true);
   }, []);
 
-  const getData = useCallback((): StorageData => {
-    return data;
-  }, [data]);
-
   const updateData = useCallback((newData: Partial<StorageData>) => {
     setData((prevData) => {
       const updatedData = { ...prevData, ...newData };
@@ -55,7 +51,7 @@ export const useLocalStorage = () => {
   }, []);
 
   return {
-    getData,
+    data,
     setData: updateData,
     clearAll,
     isHydrated,
