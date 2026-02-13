@@ -40,3 +40,12 @@ body {
     background-size: 128px 128px;
   }
 }
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}

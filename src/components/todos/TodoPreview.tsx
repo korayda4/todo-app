@@ -1,17 +1,13 @@
 'use client';
 
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useTodoContext } from '@/context/TodoContext';
 import { useTabContext } from '@/context/TabContext';
 
 export const TodoPreview = () => {
-  const { data, isHydrated } = useLocalStorage();
+  const { allTodos } = useTodoContext();
   const { setActiveTab, tabs } = useTabContext();
 
-  if (!isHydrated) {
-    return null;
-  }
-
-  const activeTodos = data.todos.filter((todo) => !todo.completed);
+  const activeTodos = allTodos.filter((todo) => !todo.completed);
 
   const getTabName = (tabId: string) => {
     return tabs.find((t) => t.id === tabId)?.name || '';

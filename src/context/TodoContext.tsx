@@ -9,6 +9,7 @@ import { useTabContext } from './TabContext';
 
 interface TodoContextValue {
   todos: Todo[];
+  allTodos: Todo[];
   createTodo: (text: string) => void;
   updateTodo: (id: string, text: string) => void;
   deleteTodo: (id: string) => void;
@@ -43,6 +44,7 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
 
   const value: TodoContextValue = {
     todos,
+    allTodos: data.todos,
     createTodo,
     updateTodo,
     deleteTodo,
