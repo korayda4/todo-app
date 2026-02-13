@@ -24,21 +24,20 @@ const TodoContext = createContext<TodoContextValue | undefined>(undefined);
 
 export const TodoProvider = ({ children }: { children: ReactNode }) => {
   const { activeTabId } = useTabContext();
-  const { getData, setData } = useLocalStorage();
-  const storageData = getData();
+  const { data, setData } = useLocalStorage();
 
   const updateStorage = (newTodos: Todo[]) => {
     setData({ todos: newTodos });
   };
 
   const { todos, createTodo, updateTodo, deleteTodo, toggleTodo, getTodoStats } = useTodos(
-    storageData.todos,
+    data.todos,
     activeTabId,
     updateStorage
   );
 
   const { createSubTask, updateSubTask, deleteSubTask, toggleSubTask } = useSubTasks(
-    storageData.todos,
+    data.todos,
     updateStorage
   );
 

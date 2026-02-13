@@ -18,25 +18,24 @@ interface TabContextValue {
 const TabContext = createContext<TabContextValue | undefined>(undefined);
 
 export const TabProvider = ({ children }: { children: ReactNode }) => {
-  const { getData, setData, isHydrated } = useLocalStorage();
-  const storageData = getData();
+  const { data, setData, isHydrated } = useLocalStorage();
 
   const updateStorage = (newTabs: Tab[], newActiveTabId?: string | null) => {
     setData({
       tabs: newTabs,
-      activeTabId: newActiveTabId !== undefined ? newActiveTabId : storageData.activeTabId,
+      activeTabId: newActiveTabId !== undefined ? newActiveTabId : data.activeTabId,
     });
   };
 
   const { createTab, updateTab, deleteTab, setActiveTab } = useTabs(
-    storageData.tabs,
-    storageData.activeTabId,
+    data.tabs,
+    data.activeTabId,
     updateStorage
   );
 
   const value: TabContextValue = {
-    tabs: storageData.tabs,
-    activeTabId: storageData.activeTabId,
+    tabs: data.tabs,
+    activeTabId: data.activeTabId,
     createTab,
     updateTab,
     deleteTab,
