@@ -18,7 +18,7 @@ export const TodoList = () => {
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 overflow-y-auto pr-2 flex-1">
       <AnimatePresence mode="popLayout">
         {todos.map((todo) => (
           <TodoItem key={todo.id} todo={todo} />

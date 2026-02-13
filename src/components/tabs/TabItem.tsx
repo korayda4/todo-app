@@ -37,21 +37,36 @@ export const TabItem = ({ tab, isActive, onClick, onUpdate, onDelete, canDelete 
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
-      className={`group flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+      onClick={onClick}
+      className={`group flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap cursor-pointer ${
         isActive
-          ? 'bg-blue-500 text-white shadow-md'
-          : 'bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 hover:border-blue-500 dark:hover:border-blue-500'
+          ? 'bg-linear-to-r from-indigo-500 to-purple-500 text-white shadow-lg shadow-indigo-500/30'
+          : 'bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700'
       }`}
     >
-      <button onClick={onClick} className="flex-1 text-left">
+      <div className="flex-1 text-left truncate">
         {tab.name}
-      </button>
+      </div>
       <div className={`flex items-center gap-1 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'} transition-opacity duration-150`}>
-        <IconButton size="sm" onClick={() => setIsEditing(true)} className={isActive ? 'text-white hover:bg-blue-600' : ''}>
+        <IconButton
+          size="sm"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsEditing(true);
+          }}
+          className={isActive ? 'text-white hover:bg-white/20' : ''}
+        >
           <PencilSimple size={14} weight="bold" />
         </IconButton>
         {canDelete && (
-          <IconButton size="sm" onClick={onDelete} className={isActive ? 'text-white hover:bg-blue-600' : ''}>
+          <IconButton
+            size="sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete();
+            }}
+            className={isActive ? 'text-white hover:bg-white/20' : ''}
+          >
             <X size={14} weight="bold" />
           </IconButton>
         )}

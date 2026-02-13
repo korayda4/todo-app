@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback } from 'react';
+import { toast } from 'react-toastify';
 import { Todo, SubTask } from '@/types';
 import { generateId } from '@/utils/id.utils';
 import { getCurrentTimestamp } from '@/utils/date.utils';
@@ -30,6 +31,7 @@ export const useSubTasks = (todos: Todo[], updateStorage: (todos: Todo[]) => voi
       );
 
       updateStorage(updatedTodos);
+      toast.success('Alt görev eklendi');
     },
     [todos, updateStorage]
   );
@@ -51,6 +53,7 @@ export const useSubTasks = (todos: Todo[], updateStorage: (todos: Todo[]) => voi
       );
 
       updateStorage(updatedTodos);
+      toast.info('Alt görev güncellendi');
     },
     [todos, updateStorage]
   );
@@ -68,6 +71,7 @@ export const useSubTasks = (todos: Todo[], updateStorage: (todos: Todo[]) => voi
       );
 
       updateStorage(updatedTodos);
+      toast.success('Alt görev silindi');
     },
     [todos, updateStorage]
   );

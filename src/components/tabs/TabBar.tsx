@@ -9,8 +9,8 @@ export const TabBar = () => {
   const { tabs, activeTabId, setActiveTab, createTab, updateTab, deleteTab } = useTabContext();
 
   return (
-    <div className="mb-8 overflow-x-auto">
-      <div className="flex items-center gap-2 pb-2">
+    <nav className="w-full h-full flex flex-col">
+      <div className="flex flex-col gap-2 overflow-y-auto pr-2">
         <AnimatePresence mode="popLayout">
           {tabs.map((tab) => (
             <TabItem
@@ -26,6 +26,6 @@ export const TabBar = () => {
         </AnimatePresence>
         <AddTabButton onAdd={createTab} />
       </div>
-    </div>
+    </nav>
   );
 };

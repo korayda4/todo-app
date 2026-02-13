@@ -43,14 +43,21 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
     setShowSubTasks(true);
   };
 
+  const priorityColors = {
+    urgent: 'bg-red-500',
+    important: 'bg-orange-500',
+    normal: 'bg-zinc-400',
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: -10, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
-      className="bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
+      className="relative bg-white dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-800 p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
     >
+      <div className={`absolute top-0 left-0 w-4 h-4 rounded-full ${priorityColors[todo.priority]} shadow-md`}></div>
       <div className="flex items-center gap-3">
         <Checkbox checked={todo.completed} onCheckedChange={() => toggleTodo(todo.id)} />
 

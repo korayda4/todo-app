@@ -38,10 +38,20 @@ export const SubTaskInput = ({ onAdd, onCancel }: SubTaskInputProps) => {
         value={text}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={handleKeyDown}
+        onBlur={() => {
+          if (!text.trim() && onCancel) {
+            onCancel();
+          }
+        }}
         autoFocus
         className="flex-1"
       />
-      <Button size="sm" variant="ghost" onClick={handleSubmit}>
+      <Button
+        size="sm"
+        variant="ghost"
+        onClick={handleSubmit}
+        onMouseDown={(e) => e.preventDefault()}
+      >
         <Plus size={18} weight="bold" />
       </Button>
     </div>

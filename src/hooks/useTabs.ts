@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback } from 'react';
+import { toast } from 'react-toastify';
 import { Tab } from '@/types';
 import { generateId } from '@/utils/id.utils';
 import { getCurrentTimestamp } from '@/utils/date.utils';
@@ -23,6 +24,7 @@ export const useTabs = (
 
       const updatedTabs = [...tabs, newTab];
       updateStorage(updatedTabs, newTab.id);
+      toast.success(`"${newTab.name}" tab'i oluşturuldu`);
     },
     [tabs, updateStorage]
   );
@@ -35,6 +37,7 @@ export const useTabs = (
           : tab
       );
       updateStorage(updatedTabs);
+      toast.info('Tab güncellendi');
     },
     [tabs, updateStorage]
   );
@@ -43,9 +46,11 @@ export const useTabs = (
     (id: string) => {
       if (tabs.length === 1) return;
 
+      const tabName = tabs.find((tab) => tab.id === id)?.name;
       const updatedTabs = tabs.filter((tab) => tab.id !== id);
       const newActiveTabId = activeTabId === id ? updatedTabs[0]?.id || null : activeTabId;
       updateStorage(updatedTabs, newActiveTabId);
+      toast.success(`"${tabName}" tab'i silindi`);
     },
     [tabs, activeTabId, updateStorage]
   );

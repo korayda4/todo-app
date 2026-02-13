@@ -1,7 +1,8 @@
 'use client';
 
 import { useCallback, useMemo } from 'react';
-import { Todo, TodoStats } from '@/types';
+import { toast } from 'react-toastify';
+import { Todo, TodoStats, TodoPriority } from '@/types';
 import { generateId } from '@/utils/id.utils';
 import { getCurrentTimestamp } from '@/utils/date.utils';
 
@@ -11,11 +12,13 @@ export const useTodos = (
   updateStorage: (todos: Todo[]) => void
 ) => {
   const filteredTodos = useMemo(() => {
-    return todos.filter((todo) => todo.tabId === activeTabId);
+    const filtered = todos.filter((todo) => todo.tabId === activeTabId);
+    const priorityOrder = { urgent: 0, important: 1, normal: 2 };
+    return filtered.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]);
   }, [todos, activeTabId]);
 
   const createTodo = useCallback(
-    (text: string) => {
+    (text: string, priority: TodoPriority = 'normal') => {
       if (!activeTabId || !text.trim()) return;
 
       const now = getCurrentTimestamp();
@@ -23,6 +26,7 @@ export const useTodos = (
         id: generateId(),
         text: text.trim(),
         completed: false,
+        priority,
         subTasks: [],
         tabId: activeTabId,
         createdAt: now,
@@ -31,6 +35,7 @@ export const useTodos = (
 
       const updatedTodos = [...todos, newTodo];
       updateStorage(updatedTodos);
+      toast.success('Görev eklendi');
     },
     [todos, activeTabId, updateStorage]
   );
@@ -43,6 +48,7 @@ export const useTodos = (
           : todo
       );
       updateStorage(updatedTodos);
+      toast.info('Görev güncellendi');
     },
     [todos, updateStorage]
   );
@@ -51,6 +57,7 @@ export const useTodos = (
     (id: string) => {
       const updatedTodos = todos.filter((todo) => todo.id !== id);
       updateStorage(updatedTodos);
+      toast.success('Görev silindi');
     },
     [todos, updateStorage]
   );

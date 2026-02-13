@@ -6,10 +6,13 @@ export interface SubTask {
   updatedAt: string;
 }
 
+export type TodoPriority = 'urgent' | 'important' | 'normal';
+
 export interface Todo {
   id: string;
   text: string;
   completed: boolean;
+  priority: TodoPriority;
   subTasks: SubTask[];
   tabId: string;
   createdAt: string;

@@ -13,9 +13,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const variantStyles = {
       default:
-        'px-6 py-3 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:border-blue-500 dark:focus:border-blue-500',
+        'px-6 py-3 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:border-zinc-400 dark:focus:border-zinc-600',
       minimal:
-        'px-3 py-2 rounded-lg bg-transparent border-b border-zinc-200 dark:border-zinc-800 focus:border-blue-500 dark:focus:border-blue-500',
+        'px-3 py-2 rounded-lg bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 focus:border-zinc-400 dark:focus:border-zinc-600',
     };
 
     return (
