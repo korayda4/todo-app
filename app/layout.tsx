@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Todo App - Modern & Minimalist",
+  title: "Todo App - Koray Demir & TNC Group",
   description: "SOLID prensipleri ile geliştirilmiş modern todo uygulaması",
 };
 
